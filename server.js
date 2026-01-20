@@ -10,8 +10,9 @@ const server = http.createServer((req, res) => {
     sendJSONResponse(res, 200, destinations);
   } else if (req.url.startsWith("/api/continent") && req.method === "GET") {
     const finalUrl = req.url.split("/").pop();
+    const searchTerm = finalUrl.replace(/-/g, " ")
     const filteredData = destinations.filter(
-      (i) => i.continent.toLowerCase() == finalUrl.toLowerCase(),
+      (i) => i.continent.toLowerCase() == searchTerm.toLowerCase(),
     );
 
     sendJSONResponse(res, 200, filteredData);
