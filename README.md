@@ -25,14 +25,31 @@ PORT=4000 npm start
 ## API
 Base URL: use either the production URL above or your local host/port.
 
-- GET /api — all destinations.
-- GET /api/continent/:name — destinations filtered by continent. Hyphens are normalized to spaces so /api/continent/north-america matches "North America".
-- GET /api/country/:name — destinations filtered by country. Hyphens are also normalized.
+### Endpoints
 
-Example requests (production):
+- `GET /api` — all destinations (with optional query parameters).
+- `GET /api/continent/:name` — destinations filtered by continent. Hyphens are normalized to spaces so `/api/continent/north-america` matches "North America".
+- `GET /api/country/:name` — destinations filtered by country. Hyphens are also normalized.
+
+### Query Parameters
+
+Filter results using query parameters with `/api`:
+
+- `continent` — filter by continent (e.g., `?continent=north-america`)
+- `country` — filter by country (e.g., `?country=usa`)
+- `is_open_to_public` — filter by public access status (e.g., `?is_open_to_public=true` or `?is_open_to_public=false`)
+
+Parameters can be combined: `?continent=europe&is_open_to_public=true`
+
+### Example Requests (Production)
+
 - All: https://crazy-destinations-api-3e3957d54285.herokuapp.com/api
-- By continent: https://crazy-destinations-api-3e3957d54285.herokuapp.com/api/continent/north-america
-- By country: https://crazy-destinations-api-3e3957d54285.herokuapp.com/api/country/usa
+- By continent (path): https://crazy-destinations-api-3e3957d54285.herokuapp.com/api/continent/north-america
+- By country (path): https://crazy-destinations-api-3e3957d54285.herokuapp.com/api/country/usa
+- By continent (query): https://crazy-destinations-api-3e3957d54285.herokuapp.com/api?continent=europe
+- By country (query): https://crazy-destinations-api-3e3957d54285.herokuapp.com/api?country=japan
+- Public destinations only: https://crazy-destinations-api-3e3957d54285.herokuapp.com/api?is_open_to_public=true
+- Combined filters: https://crazy-destinations-api-3e3957d54285.herokuapp.com/api?continent=south-america&is_open_to_public=true
 
 Responses are JSON arrays of destination objects shaped like:
 ```json
