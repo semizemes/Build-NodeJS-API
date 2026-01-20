@@ -1,4 +1,5 @@
 import http from "node:http";
+import fs from "node:fs/promises"
 import { getDataFromDB } from "./database/db.js";
 import sendJSONResponse from "./utils/sendJSONResponse.js";
 import { getDataByPathParams } from "./utils/getDataByPathParams.js";
@@ -32,6 +33,10 @@ const server = http.createServer(async (req, res) => {
       200,
       getDataByPathParams(destinations, "country", country),
     );
+  } else if(req.url === '/' && req.method === "GET"){
+    const readme = await fs.readFile("./README.md", "utf-8")
+    res.writeHead(200, {"Content-Type": "text/plain; charset=utf-8"})
+    res.end(readme)
   } else {
     sendJSONResponse(res, 404, {
       error: "not found",
