@@ -3,7 +3,7 @@ import { getDataFromDB } from "./database/db.js";
 import sendJSONResponse from "./utils/sendJSONResponse.js";
 import { getDataByPathParams } from "./utils/getDataByPathParams.js";
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000
 const destinations = await getDataFromDB();
 
 const server = http.createServer((req, res) => {
